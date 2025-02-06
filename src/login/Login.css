@@ -1,0 +1,25 @@
+/* Custom CSS for splash screen (logo) */
+.splash-screen {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 1;
+  }
+  
+  .logo-container img {
+    width: 120px;
+    height: 120px;
+    animation: logo-fade 2s ease-out forwards;
+  }
+  
+  /* Add animation for logo fade */
+  @keyframes logo-fade {
+    0% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
