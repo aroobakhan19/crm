@@ -23,7 +23,7 @@ import { Stack } from '@mui/material';
 
 
 
-const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
+const settings = ['Logout'];
 
 const Header = () => {
   const navigate = useNavigate();
@@ -39,6 +39,9 @@ const Header = () => {
     task: false,
   });
   const [addButtonMenu, setAddButtonMenu] = useState(null);
+  const [userMenuOpen,setUserMenuOpen] = useState()
+
+  const open = Boolean(userMenuOpen);
 
   const toggleDropdown = (dropdown) => {
     setOpenDropdowns((prev) => ({
@@ -163,6 +166,26 @@ const Header = () => {
     handleClose();
   };
 
+  const handleUserOpen = (event) => {
+    setUserMenuOpen(event.currentTarget);
+  };
+
+  const handleUserClose = () => {
+    setUserMenuOpen(null);
+  };
+
+  const handleLogout = () => {
+    handleUserClose();
+    // Redirect to login page
+    navigate("/Login", { replace: true });
+
+    // Disable back button
+    window.history.pushState(null, "", window.location.href);
+    window.addEventListener("popstate", function (event) {
+      window.history.pushState(null, "", window.location.href);
+    });
+  }
+
   return (
     <Box sx={{ display: 'flex' }}>
      <AppBar position="fixed" sx={{ background: 'white', color: 'black', zIndex: 1300, boxShadow: 2 }}>
@@ -237,18 +260,33 @@ const Header = () => {
       </Menu>
 
       <Tooltip title="Open settings">
-        <IconButton sx={{ p: 0, ml: 2 }}>
+        <IconButton sx={{ p: 0, ml: 2 }} onClick={handleUserOpen}>
           <Avatar alt="User Avatar" src="/static/images/avatar/2.jpg" />
         </IconButton>
       </Tooltip>
-      <Menu id="menu-appbar" anchorEl={null} open={false} onClose={() => {}}>
+      
+      <Menu
+        id="menu-appbar"
+        anchorEl={userMenuOpen}
+        open={open}
+        onClose={handleUserClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "right",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+      >
         {settings.map((setting) => (
-          <ListItem button key={setting} onClick={() => {}}>
-            <ListItemText primary={setting} />
-          </ListItem>
+          <MenuItem key={setting} 
+          onClick={setting === "Logout" ? handleLogout : handleClose}
+          >
+            {setting}
+          </MenuItem>
         ))}
-      </Menu>
-    {/* </Box> */}
+      </Menu>    {/* </Box> */}
   </Toolbar>
 </AppBar>
 
