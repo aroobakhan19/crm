@@ -21,7 +21,7 @@ const ExpenseReport = () => {
     const fetchReport = async () => {
         setLoading(true);
         try {
-            const response = await axios.get('http://localhost:3001/report/ExpenseReport'); // Adjust the API endpoint as necessary
+            const response = await axios.get('https://crm-backend-plum.vercel.app/report/ExpenseReport'); // Adjust the API endpoint as necessary
             setReport(response.data);
         } catch (error) {
             console.error('Error fetching report:', error);

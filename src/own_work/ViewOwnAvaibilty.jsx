@@ -36,7 +36,7 @@ const ViewOwnAvaibilty = () => {
             const getAvaibility = async () => {
                   try {
                       const token = localStorage.getItem('token'); // Adjust based on token storage
-                      const response = await fetch('http://localhost:3001/ownAvaibility', {
+                      const response = await fetch('https://crm-backend-plum.vercel.app/ownAvaibility', {
                           headers: {
                               'Authorization': `Bearer ${token}`,
                           }
@@ -55,7 +55,7 @@ const ViewOwnAvaibilty = () => {
           const handleDelete = async (id) => {
             try {
               const token = localStorage.getItem('token');
-              const response = await fetch(`http://localhost:3001/ownAvaibility/${id}`, {
+              const response = await fetch(`https://crm-backend-plum.vercel.app/ownAvaibility/${id}`, {
                 method: 'DELETE',
                 headers: {
                   Authorization: `Bearer ${token}`,

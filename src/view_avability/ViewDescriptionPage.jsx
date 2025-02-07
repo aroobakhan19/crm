@@ -20,7 +20,7 @@ const ViewDescriptionPage = () => {
     
     async function getDeveloperAvabilityDescription() {
       try {
-        const res = await fetch(`http://localhost:3001/developerAvability/${id}`);
+        const res = await fetch(`https://crm-backend-plum.vercel.app/developerAvability/${id}`);
         const data = await res.json();
         setViewAvability(data.data);
       } catch (error) {

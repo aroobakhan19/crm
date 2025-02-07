@@ -170,7 +170,7 @@ const AddExpenseModal = () => {
 
   const fetchVoucherNumber = async (category) => {
     try {
-        const response = await fetch(`http://localhost:3001/expense/next-voucher/${category}`);
+        const response = await fetch(`https://crm-backend-plum.vercel.app/expense/next-voucher/${category}`);
         const data = await response.json();
         setVoucherNumber(data.nextVoucherNo);
     } catch (error) {

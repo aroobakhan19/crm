@@ -24,7 +24,7 @@ const ViewReceivable = () => {
     
       async function getExpenses() {
         try {
-          const res = await fetch('http://localhost:3001/receivable');
+          const res = await fetch('https://crm-backend-plum.vercel.app/receivable');
           const result = await res.json();
           setData(result.data);
           setFilteredData(result.data);

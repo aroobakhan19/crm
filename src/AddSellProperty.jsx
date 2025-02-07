@@ -55,7 +55,7 @@ const AddSellProperty = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const url = new URL('http://localhost:3001/addsSellPropert/getProjectDetails');
+                const url = new URL('https://crm-backend-plum.vercel.app/addsSellPropert/getProjectDetails');
                 url.searchParams.append('propertyCategory', propertyCategory);
                 url.searchParams.append('propertyNo', propertyNo);
 

@@ -153,7 +153,7 @@ function BalanceSheet() {
   useEffect(() => {
     const fetchReport = async () => {
       try {
-        const response = await fetch("http://localhost:3001/report/balanceReport"); // Update the URL if necessary
+        const response = await fetch("https://crm-backend-plum.vercel.app/report/balanceReport"); // Update the URL if necessary
         if (!response.ok) {
           throw new Error("Failed to fetch the report data");
         }

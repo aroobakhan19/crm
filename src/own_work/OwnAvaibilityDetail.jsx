@@ -20,7 +20,7 @@ const OwnAvaibilityDetail = () => {
     
     async function getofficeAvabilityDescription() {
       try {
-        const res = await fetch(`http://localhost:3001/ownAvaibility/${id}`);
+        const res = await fetch(`https://crm-backend-plum.vercel.app/ownAvaibility/${id}`);
         const data = await res.json();
         setViewAvability(data.data);
       } catch (error) {

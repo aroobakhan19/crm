@@ -6,7 +6,7 @@ const [selectedBank, setSelectedBank] = useState("");
 const [bankBalanceReport, setBankBalanceReport] = useState(null);
 const fetchBankBalanceReport = async () => {
     try {
-      const response = await fetch(`http://localhost:3001/submitVoucher/bankBalanceReport?selectedBank=${selectedBank}`);
+      const response = await fetch(`https://crm-backend-plum.vercel.app/submitVoucher/bankBalanceReport?selectedBank=${selectedBank}`);
       const data = await response.json();
       setBankBalanceReport(data);
     } catch (error) {

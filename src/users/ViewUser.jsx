@@ -110,7 +110,7 @@ const ViewUser = () => {
 
   async function getUsers() {
     try {
-      await fetch('http://localhost:3001/users')
+      await fetch('https://crm-backend-plum.vercel.app/users')
         .then(res => res.json())
         .then(res => {
           setData(res.data);
@@ -136,7 +136,7 @@ const ViewUser = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3001/users/${id}`, {
+      const response = await fetch(`https://crm-backend-plum.vercel.app/users/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

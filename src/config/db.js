@@ -2,7 +2,7 @@ const token = localStorage.getItem('token');
 
 export async function LoginUser(userLogin) {
     try {
-      const response = await fetch('http://localhost:3001/users/login', {
+      const response = await fetch('https://crm-backend-plum.vercel.app/users/login', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -34,7 +34,7 @@ export async function LoginUser(userLogin) {
 
 export async function addUser(information) {
     try{
-       const response = await fetch('http://localhost:3001/users/register',{
+       const response = await fetch('https://crm-backend-plum.vercel.app/users/register',{
              method:"POST",
              headers:{
                  'Content-Type': 'application/json'
@@ -69,7 +69,7 @@ export async function addUser(information) {
 
 export async function Addproject(addproject){
   try{
-    const response = await fetch('http://localhost:3001/project/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/project/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -104,7 +104,7 @@ export async function Addproject(addproject){
 
 export async function Addrequirments(addrequirment){
   try{
-    const response = await fetch('http://localhost:3001/requirment/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/requirment/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -142,7 +142,7 @@ export async function Addrequirments(addrequirment){
 
 export async function AddDeveloperAvability(adddeveloperavability){
   try{
-    const response = await fetch('http://localhost:3001/developerAvability/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/developerAvability/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -179,7 +179,7 @@ export async function AddDeveloperAvability(adddeveloperavability){
 
 export async function AddOfficeAvability(addofficeavability){
   try{
-    const response = await fetch('http://localhost:3001/officeAvability/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/officeAvability/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -216,7 +216,7 @@ export async function AddOfficeAvability(addofficeavability){
 
 export async function Addtask(addtask){
   try{
-    const response = await fetch('http://localhost:3001/task/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/task/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -247,7 +247,7 @@ export async function Addtask(addtask){
 
 export async function AddExpense(addexpense) {
   try {
-    const response = await fetch('http://localhost:3001/submitVoucher/register', {
+    const response = await fetch('https://crm-backend-plum.vercel.app/submitVoucher/register', {
       method: "POST",
       headers: {
         'Content-Type': 'application/json'
@@ -271,7 +271,7 @@ export async function AddExpense(addexpense) {
 
 export async function AddSell(consolidatedData) {
   try {
-      const response = await fetch('http://localhost:3001/addsSellPropert/addSellProject', {
+      const response = await fetch('https://crm-backend-plum.vercel.app/addsSellPropert/addSellProject', {
           method: 'POST',
           headers: {
               'Content-Type': 'application/json',
@@ -296,7 +296,7 @@ export async function AddSell(consolidatedData) {
 
 export async function AddOwnrequirments(addrequirment){
   try{
-    const response = await fetch('http://localhost:3001/ownRequirment/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/ownRequirment/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -333,7 +333,7 @@ export async function AddOwnrequirments(addrequirment){
 
 export async function AddownAvaibility(addavability){
   try{
-    const response = await fetch('http://localhost:3001/ownAvaibility/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/ownAvaibility/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -371,7 +371,7 @@ export async function AddownAvaibility(addavability){
 
 export async function AddOwntask(addtask){
   try{
-    const response = await fetch('http://localhost:3001/ownTask/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/ownTask/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json',
@@ -394,7 +394,7 @@ export async function AddOwntask(addtask){
 
 export async function Addbalance(addbalance){
   try{
-    const response = await fetch('http://localhost:3001/balance/register',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/balance/register',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json'
@@ -417,7 +417,7 @@ export async function Addbalance(addbalance){
 
 export async function payCommission(paycommission){
   try{
-    const response = await fetch('http://localhost:3001/addsSellPropert/deductCommission',{
+    const response = await fetch('https://crm-backend-plum.vercel.app/addsSellPropert/deductCommission',{
           method:"POST",
           headers:{
               'Content-Type': 'application/json'

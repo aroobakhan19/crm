@@ -17,7 +17,7 @@ useEffect(() => {
    
    async function fetchExpenses() {
        try {
-           const res = await fetch(`http://localhost:3001/receivable/${id}`);
+           const res = await fetch(`https://crm-backend-plum.vercel.app/receivable/${id}`);
            const data = await res.json();
            setExpenseDetail(data.data);
      

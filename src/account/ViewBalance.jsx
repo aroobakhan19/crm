@@ -23,7 +23,7 @@ const ViewBalance = () => {
 
   async function getBalances() {
     try {
-      const res = await fetch('http://localhost:3001/balance');
+      const res = await fetch('https://crm-backend-plum.vercel.app/balance');
       const result = await res.json();
       setData(result.data);
       setFilteredData(result.data);

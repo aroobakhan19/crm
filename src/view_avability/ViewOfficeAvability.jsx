@@ -40,7 +40,7 @@ const ViewOfficeAvability = () => {
       
       async function getOfficeAvability() {
         try {
-          const res = await fetch('http://localhost:3001/officeAvability/');
+          const res = await fetch('https://crm-backend-plum.vercel.app/officeAvability/');
           const data = await res.json();
           setViewAvability(data.data);
           setFilteredData(data.data);
@@ -88,7 +88,7 @@ const ViewOfficeAvability = () => {
       const handleDelete = async (id) => {
         try {
           const token = localStorage.getItem('token');
-          const response = await fetch(`http://localhost:3001/officeAvability/${id}`, {
+          const response = await fetch(`https://crm-backend-plum.vercel.app/officeAvability/${id}`, {
             method: 'DELETE',
             headers: {
               Authorization: `Bearer ${token}`,

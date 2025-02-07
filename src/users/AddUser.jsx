@@ -54,7 +54,7 @@ const AddUser = () => {
   useEffect(() => {
     const fetchNextUserId = async () => {
       try {
-        const response = await axios.get("http://localhost:3001/users/next-id");
+        const response = await axios.get("https://crm-backend-plum.vercel.app/users/next-id");
         console.log("Fetched Next User ID:", response.data.nextUserId); 
         setUserId(response.data.nextUserId); 
       } catch (error) {

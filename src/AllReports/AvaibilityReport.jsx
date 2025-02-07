@@ -23,7 +23,7 @@ const AvaibilityReport = () => {
         const fetchReportData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:3001/report/avaibiltyReport');
+                const response = await axios.get('https://crm-backend-plum.vercel.app/report/avaibiltyReport');
                 console.log('Fetched report data:', response.data);
                 setReportData(response.data);
             } catch (error) {

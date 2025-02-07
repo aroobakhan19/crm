@@ -32,7 +32,7 @@ const ViewOwnTask = () => {
   async function getTask() {
     try {
       const token = localStorage.getItem('token'); // Adjust based on token storage
-      const response = await fetch('http://localhost:3001/ownTask', {
+      const response = await fetch('https://crm-backend-plum.vercel.app/ownTask', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -67,7 +67,7 @@ const ViewOwnTask = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3001/ownTask/${id}`, {
+      const response = await fetch(`https://crm-backend-plum.vercel.app/ownTask/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

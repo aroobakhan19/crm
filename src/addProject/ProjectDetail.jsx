@@ -20,7 +20,7 @@ const ProjectDetail = () => {
     
     async function getProjectDetail() {
       try {
-        const res = await fetch(`http://localhost:3001/project/${id}`);
+        const res = await fetch(`https://crm-backend-plum.vercel.app/project/${id}`);
         const data = await res.json();
         setViewProject(data.data);
       } catch (error) {

@@ -81,7 +81,7 @@ const voucherData = location.state || {};
 
   const fetchVoucherNumber = async (category) => {
     try {
-        const response = await fetch(`http://localhost:3001/submitVoucher/next-voucher/${category}`);
+        const response = await fetch(`https://crm-backend-plum.vercel.app/submitVoucher/next-voucher/${category}`);
         const data = await response.json();
         setVoucherNumber(data.nextVoucherNo);
     } catch (error) {

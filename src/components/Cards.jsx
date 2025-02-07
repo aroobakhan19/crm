@@ -47,7 +47,7 @@ const Cards = () => {
 
 async function getProjects(){
   try {
-    const response = await fetch('http://localhost:3001/project', {
+    const response = await fetch('https://crm-backend-plum.vercel.app/project', {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${token}`,
@@ -67,7 +67,7 @@ async function getProjects(){
 
 async function getTask(){
   try {
-    const response = await fetch('http://localhost:3001/task', {
+    const response = await fetch('https://crm-backend-plum.vercel.app/task', {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${token}`,
@@ -87,7 +87,7 @@ async function getTask(){
 
 async function getRequirment(){
   try {
-    const response = await fetch('http://localhost:3001/requirment', {
+    const response = await fetch('https://crm-backend-plum.vercel.app/requirment', {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${token}`,
@@ -107,7 +107,7 @@ async function getRequirment(){
 
 async function getAvaibilty(){
   try {
-    const response = await fetch('http://localhost:3001/officeAvability', {
+    const response = await fetch('https://crm-backend-plum.vercel.app/officeAvability', {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${token}`,
@@ -131,7 +131,7 @@ async function getAvaibilty(){
 
 
 const fetchUserName = async () => {
-  const response = await fetch('http://localhost:3001/users/getUserByToken', {
+  const response = await fetch('https://crm-backend-plum.vercel.app/users/getUserByToken', {
       method: 'GET',
       headers: {
           'Authorization': `Bearer ${token}`

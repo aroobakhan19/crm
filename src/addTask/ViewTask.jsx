@@ -40,7 +40,7 @@ const ViewTask = () => {
     
      async function getTask(){
       try {
-        const response = await fetch(`http://localhost:3001/task/view`,{
+        const response = await fetch(`https://crm-backend-plum.vercel.app/task/view`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
@@ -67,7 +67,7 @@ const ViewTask = () => {
 
     async function completed (_id) {
       try {
-        const response = await fetch(`http://localhost:3001/task/updateStatus/${_id}`,{
+        const response = await fetch(`https://crm-backend-plum.vercel.app/task/updateStatus/${_id}`,{
         method: 'PATCH',
         headers: {
             'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ const ViewTask = () => {
 
     async function getTaskForAdmin(){
       try {
-        const response = await fetch(`http://localhost:3001/task`,{
+        const response = await fetch(`https://crm-backend-plum.vercel.app/task`,{
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',

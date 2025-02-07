@@ -24,7 +24,7 @@ const ViewAssets = () => {
     
       async function getExpenses() {
         try {
-          const res = await fetch('http://localhost:3001/assets');
+          const res = await fetch('https://crm-backend-plum.vercel.app/assets');
           const result = await res.json();
           setData(result.data);
           setFilteredData(result.data);

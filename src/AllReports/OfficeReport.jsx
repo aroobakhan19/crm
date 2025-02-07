@@ -23,7 +23,7 @@ const OfficeReport = () => {
         const fetchOfficeReportData = async () => {
             setLoading(true);
             try {
-                const response = await axios.get('http://localhost:3001/report/officeAvaibiltyReport');
+                const response = await axios.get('https://crm-backend-plum.vercel.app/report/officeAvaibiltyReport');
                 console.log('Fetched report data:', response.data);
                 setOfficeReportData(response.data);
             } catch (error) {

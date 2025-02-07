@@ -181,7 +181,7 @@ const [dateFilter, setDateFilter] = useState('');
 
   const getRequirments = async () => {
     try {
-      const response = await fetch('http://localhost:3001/requirment');
+      const response = await fetch('https://crm-backend-plum.vercel.app/requirment');
       const result = await response.json();
       setData(result.data);
       setFilteredData(result.data); // Initially, show all data
@@ -228,7 +228,7 @@ const [dateFilter, setDateFilter] = useState('');
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3001/requirment/${id}`, {
+      const response = await fetch(`https://crm-backend-plum.vercel.app/requirment/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

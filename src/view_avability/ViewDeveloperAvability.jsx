@@ -40,7 +40,7 @@ const ViewDeveloperAvability = () => {
 
   async function getDeveloperAvability() {
     try {
-      const res = await fetch('http://localhost:3001/developerAvability/');
+      const res = await fetch('https://crm-backend-plum.vercel.app/developerAvability/');
       const data = await res.json();
       setViewAvability(data.data);
       setFilteredData(data.data);
@@ -87,7 +87,7 @@ const ViewDeveloperAvability = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3001/developerAvability/${id}`, {
+      const response = await fetch(`https://crm-backend-plum.vercel.app/developerAvability/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

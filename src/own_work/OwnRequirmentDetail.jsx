@@ -20,7 +20,7 @@ const OwnRequirmentDetail = () => {
     
     async function getRequirmentDetail() {
       try {
-        const res = await fetch(`http://localhost:3001/ownRequirment/${id}`);
+        const res = await fetch(`https://crm-backend-plum.vercel.app/ownRequirment/${id}`);
         const data = await res.json();
         setViewRequirment(data.data);
       } catch (error) {

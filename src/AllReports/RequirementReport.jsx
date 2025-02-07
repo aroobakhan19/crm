@@ -25,7 +25,7 @@ const RequirementReport = () => {
     const fetchReportData = async () => {
       setLoading(true);
       try {
-        const response = await axios.get('http://localhost:3001/report/requirementReport');
+        const response = await axios.get('https://crm-backend-plum.vercel.app/report/requirementReport');
         setReportData(response.data.report);
         setTotalPrice(response.data.totalPrice);
       } catch (error) {

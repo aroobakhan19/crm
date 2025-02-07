@@ -17,7 +17,7 @@ const VoucherReport = () => {
 
   const fetchExpenses = async () => {
     try {
-      const response = await axios.get("http://localhost:3001/submitVoucher");
+      const response = await axios.get("https://crm-backend-plum.vercel.app/submitVoucher");
   
       console.log("API Response:", response.data); // Debugging
   

@@ -34,7 +34,7 @@ const ViewSellItem = () => {
 
   const getData = async () => {
     try {
-      const res = await fetch('http://localhost:3001/addsSellPropert/');
+      const res = await fetch('https://crm-backend-plum.vercel.app/addsSellPropert/');
       const data = await res.json();
       setData(data.data);
     } catch (error) {

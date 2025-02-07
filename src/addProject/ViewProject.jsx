@@ -138,7 +138,7 @@ const ViewProject = () => {
 
   async function getProjects() {
     try {
-      const response = await fetch('http://localhost:3001/project');
+      const response = await fetch('https://crm-backend-plum.vercel.app/project');
       const result = await response.json();
       setData(result.data);
       setFilteredData(result.data); 
@@ -178,7 +178,7 @@ const ViewProject = () => {
   const handleDelete = async (id) => {
     try {
       const token = localStorage.getItem('token');
-      const response = await fetch(`http://localhost:3001/project/${id}`, {
+      const response = await fetch(`https://crm-backend-plum.vercel.app/project/${id}`, {
         method: 'DELETE',
         headers: {
           Authorization: `Bearer ${token}`,

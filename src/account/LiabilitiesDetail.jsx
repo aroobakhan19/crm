@@ -27,7 +27,7 @@ const LiabilitiesDetail = () => {
     const fetchDetails = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3001/addsSellPropert/getLiabilityDetails/${employeeId}`
+          `https://crm-backend-plum.vercel.app/addsSellPropert/getLiabilityDetails/${employeeId}`
         );
         setDetails(response.data.data);
         // setPaymentHistory(response.data.data.paymentHistory || []);
@@ -50,7 +50,7 @@ useEffect(() => {
   const fetchCommissionHistory = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3001/commissionHistory/${employeeId}`
+        `https://crm-backend-plum.vercel.app/commissionHistory/${employeeId}`
       );
       setCommissionHistory(response.data.commissionHistory);
     } catch (error) {

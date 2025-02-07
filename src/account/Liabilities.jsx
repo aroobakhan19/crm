@@ -14,7 +14,7 @@ const Liabilities = () => {
     useEffect(() => {
         const fetchLiabilities = async () => {
             try {
-                const response = await axios.get('http://localhost:3001/addsSellPropert/getLiabilities');
+                const response = await axios.get('https://crm-backend-plum.vercel.app/addsSellPropert/getLiabilities');
                 setLiabilities(response.data.data);
             } catch (err) {
                 setError(err.message);

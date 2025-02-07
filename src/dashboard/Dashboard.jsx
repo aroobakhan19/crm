@@ -49,7 +49,7 @@ const Dashboard = () => {
   async function getTask() {
     try {
       const token = localStorage.getItem('token'); // Adjust based on token storage
-      const response = await fetch('http://localhost:3001/ownTask', {
+      const response = await fetch('https://crm-backend-plum.vercel.app/ownTask', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -71,7 +71,7 @@ const Dashboard = () => {
   async function getRequirment() {
     try {
       const token = localStorage.getItem('token'); // Adjust based on token storage
-      const response = await fetch('http://localhost:3001/ownRequirment', {
+      const response = await fetch('https://crm-backend-plum.vercel.app/ownRequirment', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
@@ -93,7 +93,7 @@ const Dashboard = () => {
   async function getAvaibility() {
     try {
       const token = localStorage.getItem('token'); // Adjust based on token storage
-      const response = await fetch('http://localhost:3001/ownAvaibility', {
+      const response = await fetch('https://crm-backend-plum.vercel.app/ownAvaibility', {
         headers: {
           Authorization: `Bearer ${token}`,
         },
