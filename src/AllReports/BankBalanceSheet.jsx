@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Header from '../components/Header';
 import {
   Typography,
   Box,
@@ -33,30 +34,34 @@ const BankBalanceSheet = () => {
   };
 
   return (
-    <Box
+    <div>
+       <Header />
+<Box
       sx={{
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
         minHeight: "100vh",
-        padding: "2rem",
+        padding: "0.5rem", // Reduced padding
         backgroundColor: "#f5f5f5",
       }}
     >
       <Paper
         elevation={3}
         sx={{
-          padding: "2rem",
+          padding: "1rem", // Reduced padding
           borderRadius: "8px",
-          width: "50%",
-          maxWidth: "800px",
+          width: "50%", // Increased width for mobile
+    boxShadow: " 10px rgba(0, 0, 0, 0.2)",  
+    marginTop: "8%",
+    marginLeft:"15%"
         }}
       >
-        <Typography variant="h4" align="center" gutterBottom>
+        <Typography variant="h6" align="center" gutterBottom sx={{fontSize:"1rem"}}> {/* Smaller heading */}
           Bank Balance Sheet
         </Typography>
 
-        <FormControl fullWidth sx={{ marginBottom: "1rem" }}>
+        <FormControl fullWidth sx={{ marginBottom: "0.5rem" }}> {/* Reduced margin */}
           <InputLabel id="bank-select-label">Select Bank</InputLabel>
           <Select
             labelId="bank-select-label"
@@ -64,6 +69,7 @@ const BankBalanceSheet = () => {
             value={selectedBank}
             label="Select Bank"
             onChange={(e) => setSelectedBank(e.target.value)}
+            size="small" // smaller select field
           >
             <MenuItem value="">Select Bank</MenuItem>
             <MenuItem value="HBL">HBL</MenuItem>
@@ -76,37 +82,40 @@ const BankBalanceSheet = () => {
         <Button
           variant="contained"
           onClick={fetchBankBalanceReport}
-          sx={{ marginBottom: "1rem", width: "100%" }}
+          sx={{ marginBottom: "0.5rem", width: "100%", fontSize:"0.8rem" }} // Reduced margin, smaller font
+          size="small" // smaller button
         >
           Fetch Bank Balance Report
         </Button>
 
         {bankBalanceReport && (
           <div>
-            <Typography variant="h5" gutterBottom>
+            <Typography variant="body1" gutterBottom sx={{fontSize:"0.9rem"}}> {/* Smaller heading */}
               Bank Balance Report for {bankBalanceReport.selectedBank}
             </Typography>
-            <Typography variant="h6" gutterBottom>
+            <Typography variant="body2" gutterBottom> {/* Smaller heading */}
               Total Balance: {bankBalanceReport.totalBankBalance}
             </Typography>
 
             {/* In Payments Table */}
-            <Typography variant="h5" gutterBottom sx={{marginTop:"1rem"}}>In Payments</Typography>
-            <TableContainer component={Paper}>
-              <Table>
-                <TableHead>
-                  <TableRow>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Date</TableCell>
+            <Typography variant="body1" gutterBottom sx={{marginTop:"0.5rem", fontSize:"0.9rem"}}> {/* Smaller heading, reduced margin */}
+              In Payments
+            </Typography>
+            <TableContainer>
+              <Table size="small" sx={{fontSize:"0.8rem"}}> {/* Smaller table, smaller font */}
+                <TableHead >
+                  <TableRow >
+                    <TableCell sx={{padding:"0.5rem"}}>Amount</TableCell>
+                    <TableCell sx={{padding:"0.5rem"}}>Description</TableCell>
+                    <TableCell sx={{padding:"0.5rem"}}>Date</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {bankBalanceReport.inPayments.map((payment, index) => (
                     <TableRow key={index}>
-                      <TableCell>{payment.amount}</TableCell>
-                      <TableCell>{payment.description}</TableCell>
-                      <TableCell>{payment.date}</TableCell>
+                      <TableCell sx={{padding:"0.5rem"}}>{payment.amount}</TableCell>
+                      <TableCell sx={{padding:"0.5rem"}}>{payment.description}</TableCell>
+                      <TableCell sx={{padding:"0.5rem"}}>{payment.date}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -114,22 +123,24 @@ const BankBalanceSheet = () => {
             </TableContainer>
 
             {/* Out Payments Table */}
-            <Typography variant="h5" gutterBottom sx={{marginTop:"1rem"}}>Out Payments</Typography>
-            <TableContainer component={Paper}>
-              <Table>
+            <Typography variant="body1" gutterBottom sx={{marginTop:"0.5rem", fontSize:"0.9rem"}}> {/* Smaller heading, reduced margin */}
+              Out Payments
+            </Typography>
+            <TableContainer>
+              <Table size="small" sx={{fontSize:"0.8rem"}}> {/* Smaller table, smaller font */}
                 <TableHead>
                   <TableRow>
-                    <TableCell>Amount</TableCell>
-                    <TableCell>Description</TableCell>
-                    <TableCell>Date</TableCell>
+                    <TableCell sx={{padding:"0.5rem"}}>Amount</TableCell>
+                    <TableCell sx={{padding:"0.5rem"}}>Description</TableCell>
+                    <TableCell sx={{padding:"0.5rem"}}>Date</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
                   {bankBalanceReport.outPayments.map((payment, index) => (
                     <TableRow key={index}>
-                      <TableCell>{payment.amount}</TableCell>
-                      <TableCell>{payment.description}</TableCell>
-                      <TableCell>{payment.date}</TableCell>
+                      <TableCell sx={{padding:"0.5rem"}}>{payment.amount}</TableCell>
+                      <TableCell sx={{padding:"0.5rem"}}>{payment.description}</TableCell>
+                      <TableCell sx={{padding:"0.5rem"}}>{payment.date}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
@@ -139,6 +150,7 @@ const BankBalanceSheet = () => {
         )}
       </Paper>
     </Box>
+    </div>
   );
 };
 
