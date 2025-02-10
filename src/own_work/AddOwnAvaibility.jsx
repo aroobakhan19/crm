@@ -44,22 +44,6 @@ const AddOwnAvaibility = () => {
 
     const addOfficeAvability = async () => {
         try {
-            if (!clientName || !clientPhoneNumber || !propertyDescription || !adress || !projectTitle || !projectType || !requirmentType || !room || !sqft) {
-                alert('Please fill all the fields');
-                return;
-            }
-            if (requirmentType === 'Sell') {
-                if (!price || !installment) {
-                    alert('filled input')
-                    return;
-                }
-            }
-            if (requirmentType === 'Rent') {
-                if (!advancePayment || !monthlyPayment) {
-                    alert('Please fill all the fields');
-                    return;
-                }
-            }
             const addavability = {
                 clientName,
                 clientPhoneNumber,
@@ -77,10 +61,28 @@ const AddOwnAvaibility = () => {
                 message
             }
             await AddownAvaibility(addavability)
+            resetForm()
         } catch (error) {
             console.error('Error:', error);
         }
+    }
 
+    const resetForm = () => {
+        setSelectedFile("")
+        setRequirmentType("")
+        setClientName("")
+        setClientPhoneNumber("")
+        setPrice("")
+        setInstallment("")
+        setAdvancePayment("")
+        setMonthlyPayment("")
+        setMessage("")
+        setAdress("")
+        setProjectTitle("")
+        setProjectType("")
+        setPropertyDescription("")
+        setRoom("")
+        setSqft("")
     }
 
     return (
@@ -134,6 +136,7 @@ const AddOwnAvaibility = () => {
                                 Upload
                                 <input
                                     type="file"
+                                    value={selectedFile}
                                     hidden
                                     onChange={handleFileChange}
                                 />
@@ -151,6 +154,7 @@ const AddOwnAvaibility = () => {
                                 </Typography>
                                 <OutlinedInput placeholder="Enter Client Name"
                                     fullWidth
+                                    value={clientName}
                                     type='string'
                                     onChange={(e) => setClientName(e.target.value)}
                                     sx={{
@@ -169,6 +173,7 @@ const AddOwnAvaibility = () => {
                                 <OutlinedInput placeholder="Enter Client Phone Number"
                                     fullWidth
                                     type='number'
+                                    value={clientPhoneNumber}
                                     onChange={(e) => setClientPhoneNumber(e.target.value)}
                                     sx={{
                                         height: '35px',
@@ -187,6 +192,7 @@ const AddOwnAvaibility = () => {
                                 </Typography>
                                 <OutlinedInput placeholder="Enter  Property Description"
                                     fullWidth
+                                    value={propertyDescription}
                                     type='string'
                                     onChange={(e) => setPropertyDescription(e.target.value)}
                                     sx={{
@@ -204,6 +210,7 @@ const AddOwnAvaibility = () => {
                                 </Typography>
                                 <OutlinedInput placeholder="Enter  Property Location"
                                     fullWidth
+                                    value={adress}
                                     type='string'
                                     onChange={(e) => setAdress(e.target.value)}
                                     sx={{
@@ -222,6 +229,7 @@ const AddOwnAvaibility = () => {
                                 </Typography>
                                 <OutlinedInput placeholder="Enter  Property Name"
                                     fullWidth
+                                    value={projectTitle}
                                     type='string'
                                     onChange={(e) => setProjectTitle(e.target.value)}
                                     sx={{
@@ -240,6 +248,7 @@ const AddOwnAvaibility = () => {
                                 <OutlinedInput placeholder="Enter  Property Type"
                                     fullWidth
                                     type='string'
+                                    value={projectType}
                                     onChange={(e) => setProjectType(e.target.value)}
                                     sx={{
                                         height: '35px',
@@ -284,6 +293,7 @@ const AddOwnAvaibility = () => {
                                 <OutlinedInput placeholder="Enter Rooms"
                                     fullWidth
                                     type='string'
+                                    value={room}
                                     onChange={(e) => setRoom(e.target.value)}
                                     sx={{
                                         height: '35px',
@@ -302,7 +312,9 @@ const AddOwnAvaibility = () => {
                 <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>
                                         Add Price</Typography>
-                                    <OutlinedInput fullWidth placeholder="Enter Price" type="number"
+                                    <OutlinedInput
+                                    value={price}
+                                     fullWidth placeholder="Enter Price" type="number"
                                         onChange={(e) => setPrice(e.target.value)}
                                         sx={{
                                             height: '35px',
@@ -316,7 +328,9 @@ const AddOwnAvaibility = () => {
                 <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>
                                         Add Installment</Typography>
-                                    <OutlinedInput fullWidth placeholder="Enter Installment" type="number"
+                                    <OutlinedInput 
+                                    value={installment}
+                                    fullWidth placeholder="Enter Installment" type="number"
                                         onChange={(e) => setInstallment(e.target.value)}
                                         sx={{
                                             height: '35px',
@@ -335,7 +349,9 @@ const AddOwnAvaibility = () => {
                 <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>
                                         Advance Payment</Typography>
-                                    <OutlinedInput fullWidth placeholder="Enter Advance Payment" type="number"
+                                    <OutlinedInput
+                                    value={advancePayment}
+                                    fullWidth placeholder="Enter Advance Payment" type="number"
                                         onChange={(e) => setAdvancePayment(e.target.value)}
                                         sx={{
                                             height: '35px',
@@ -348,7 +364,9 @@ const AddOwnAvaibility = () => {
                                 </Box>
                 <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Monthly Rent</Typography>
-                                    <OutlinedInput fullWidth placeholder="Enter Monthly Rent" type="number"
+                                    <OutlinedInput
+                                    value={monthlyPayment}
+                                    fullWidth placeholder="Enter Monthly Rent" type="number"
                                         onChange={(e) => setMonthlyPayment(e.target.value)}
                                         sx={{
                                             height: '35px',
@@ -369,6 +387,7 @@ const AddOwnAvaibility = () => {
                                 <OutlinedInput placeholder="Enter  Property Sqft"
                                     fullWidth
                                     type='string'
+                                    value={sqft}
                                     onChange={(e) => setSqft(e.target.value)}
                                     sx={{
                                         height: '55px',
@@ -391,6 +410,7 @@ const AddOwnAvaibility = () => {
                                     fullWidth
                                     variant="filled"
                                     type='string'
+                                    value={message}
                                     onChange={(e) => setMessage(e.target.value)}
                                     sx={{
                                         height: '35px',

@@ -125,7 +125,6 @@ const Header = () => {
         { text: 'View requirment report', link: '/RequirementReport' },
         { text: 'View Project Report', link: '/ProjectReport' },
        { text: 'Voucher report', link: '/VoucherReport' },
-       { text: 'Expense report', link: '/ExpenseReport' },
        { text: 'Balance sheet report', link: '/BalanceSheet' },
        { text: 'Bank Balance sheet report', link: '/BankBalanceSheet' },
        { 

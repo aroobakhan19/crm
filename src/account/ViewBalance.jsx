@@ -12,6 +12,7 @@ const ViewBalance = () => {
   const [filteredData, setFilteredData] = useState([]);
   const [descriptionFilter, setDescriptionFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
+  const [category,setCategory] = useState('')
 
   useEffect(() => {
     getBalances();
@@ -19,7 +20,7 @@ const ViewBalance = () => {
 
   useEffect(() => {
     applyFilters();
-  }, [descriptionFilter, dateFilter, data]);
+  }, [descriptionFilter, dateFilter, data,category]);
 
   async function getBalances() {
     try {
@@ -49,6 +50,11 @@ const ViewBalance = () => {
         new Date(item.createdAt).toLocaleDateString() === new Date(dateFilter).toLocaleDateString()
       );
     }
+    if (category) {
+      filtered = filtered.filter((item) =>
+        item.category.toLowerCase().includes(category.toLowerCase())
+      );
+    }
   
     setFilteredData(filtered);
   };
@@ -71,6 +77,21 @@ const ViewBalance = () => {
           }}
         />
 
+<OutlinedInput
+          placeholder="Filter by Category"
+          fullWidth
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+          sx={{
+            backgroundColor: '#F5F5F5',
+            borderRadius: 2,
+            ml: 2,
+            '& .MuiOutlinedInput-root': {
+              borderColor: '#1982C4',
+            },
+          }}
+        />
+
         <OutlinedInput
           type="date"
           sx={{ ml: 1, backgroundColor: '#F5F5F5', borderRadius: 2 }}
@@ -79,25 +100,7 @@ const ViewBalance = () => {
           onChange={(e) => setDateFilter(e.target.value)}
           
         />
-                <Button
-    sx={{
-      ml: 4,
-      backgroundColor: '#011936',
-      '&:hover': {
-        backgroundColor: '#014F86',
-      },
-      color: 'white',
-      fontWeight: 'bold',
-      padding: '10px 20px',
-      borderRadius: '5px',
-    }}
-                  variant="contained"
-                color="primary"
-                fullWidth
-              onClick={() => navigate('/AddBalance')}
-              >
-                Add
-              </Button>
+          
       </Box>
       <Box sx={{ ml: { xs: 0, md: '23%' }, mt: { md: 3, xs: 8 }, backgroundColor: '#FFFFFF', borderRadius: '8px', padding: 2 }}>
         <TableContainer>
@@ -106,9 +109,11 @@ const ViewBalance = () => {
               <TableRow>
                 <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Balance Description</TableCell>
                 <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Balance Amount</TableCell>
-                <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Balance Note</TableCell>
+                <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Voucher No</TableCell>
                 <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Created At</TableCell>
                 <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Action</TableCell>
+                <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Type</TableCell>
+                <TableCell sx={{ fontWeight: 'bold',color: 'white' }}>Category</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -123,6 +128,8 @@ const ViewBalance = () => {
                     {row.action} payment
                     </Box>
                   </TableCell>
+                  <TableCell>{row.expenseType}</TableCell>
+                  <TableCell>{row.category}</TableCell>
                 </TableRow>
               ))}
             </TableBody>

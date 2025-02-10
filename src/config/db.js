@@ -1,3 +1,26 @@
+import toast from "react-hot-toast";
+
+const showToast = (message, type) => {
+  toast.custom(
+    (t) => (
+      <div
+        style={{
+          padding: "10px 20px",
+          color: "#fff",
+          backgroundColor: type === "success" ? "#4CAF50" : "#F44336",
+          borderRadius: "8px",
+          boxShadow: "0px 4px 10px rgba(0, 0, 0, 0.2)",
+          fontWeight: "bold",
+        }}
+      >
+        {message}
+      </div>
+    ),
+    { duration: 3000, position: "top-right" }
+  );
+};
+
+
 const token = localStorage.getItem('token');
 
 export async function LoginUser(userLogin) {
@@ -57,10 +80,10 @@ export async function addUser(information) {
          const data = await response.json();
          if (response.ok) {
            console.log(data);
-           alert('User add successful!');
-         } else {
-           alert('Failed to add user')
-         }
+           showToast('user add successful!',"success");
+          } else {
+            showToast('Failed to add user', "error")
+          }
      } catch (e){
          console.log(e.message)
          throw new Error('Failed to add user to the database')
@@ -81,7 +104,7 @@ export async function Addproject(addproject){
             BedRoom: addproject.bedroom,  
             bathRoom: addproject.bathroom, 
             squareFeet: addproject.sqft, 
-            price: addproject.price,
+            addPrice: addproject.price,
             Location: addproject.address,  
             state: addproject.state,  
             country: addproject.country,  
@@ -91,9 +114,9 @@ export async function Addproject(addproject){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('project add successful!');
+        showToast('project add successful!',"success");
       } else {
-        alert('Failed to add user')
+        showToast('Failed to add project', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -128,9 +151,9 @@ export async function Addrequirments(addrequirment){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('requirment add successful!');
+        showToast('requirment add successful!',"success");
       } else {
-        alert('Failed to add user')
+        showToast('Failed to add requirment', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -167,9 +190,9 @@ export async function AddDeveloperAvability(adddeveloperavability){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('avability add successful!');
+        showToast('Avaibility add successful!',"success");
       } else {
-        alert('Failed to add user')
+        showToast('Failed to add avaibility', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -193,8 +216,8 @@ export async function AddOfficeAvability(addofficeavability){
             propertyName: addofficeavability.projectTitle, 
             ProjectType: addofficeavability.projectType,
             requirmentType: addofficeavability.requirmentType,  
-            projectPrice: addofficeavability.price, 
-            projectAdvanceRent: addofficeavability.advancePayment,  
+            addPrice: addofficeavability.price, 
+            addAdvancedPayment: addofficeavability.advancePayment,  
             projectMonthlyRent: addofficeavability.monthlyPayment, 
             rooms: addofficeavability.room,
             sqft: addofficeavability.sqft,
@@ -204,9 +227,9 @@ export async function AddOfficeAvability(addofficeavability){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('avability add successful!');
+        showToast('avaibility add successful!',"success");
       } else {
-        alert('Failed to add user')
+        showToast('Failed to add avaibility', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -234,9 +257,9 @@ export async function Addtask(addtask){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('requirment add successful!');
+        showToast('task add successful!',"success");
       } else {
-        alert('Failed to add user')
+        showToast('Failed to add task', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -258,10 +281,9 @@ export async function AddExpense(addexpense) {
     const data = await response.json();
     if (response.ok) {
       console.log(data);
-      alert('Expense added successfully!');
+      showToast('expense add successful!',"success");
     } else {
-      console.error("Error response from server:", data);
-      alert('Failed to add expense.');
+      showToast('Failed to add expense', "error")
     }
   } catch (e) {
     console.error("Error while adding expense:", e.message);
@@ -282,11 +304,10 @@ export async function AddSell(consolidatedData) {
       const data = await response.json();
       if (response.ok) {
           console.log('Server Response:', data);
-          alert('Expense added successfully!');
-      } else {
-          console.error('Error Response:', data);
-          alert(`Failed to add expense: ${data.message || 'Unknown error'}`);
-      }
+          showToast('data add successful!',"success");
+        } else {
+          showToast(data.message || 'Failed to add data', "error");
+        }
   } catch (error) {
       console.error('Network Error:', error.message);
       alert(`Network error: ${error.message}`);
@@ -320,13 +341,13 @@ export async function AddOwnrequirments(addrequirment){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('requirment add successful!');
+        showToast('requirment add successful!', "success");
       } else {
-        alert('Failed to add user')
+        showToast('Failed to add requirment', "error")
       }
   } catch (e){
       console.log(e.message)
-      throw new Error('Failed to add user to the database')
+      throw new Error('Failed to add requirment to the database')
   }
 }
 
@@ -358,9 +379,9 @@ export async function AddownAvaibility(addavability){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('avaibility add successful!');
+        showToast('avaibility add successful!', "success");
       } else {
-        alert('Failed to add user')
+        showToast('Failed to add user', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -382,9 +403,9 @@ export async function AddOwntask(addtask){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('task add successful!');
+        showToast('task add successful!', "success");
       } else {
-        alert('Failed to add task')
+        showToast('Failed to add task', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -404,9 +425,9 @@ export async function Addbalance(addbalance){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('balance add successful!');
+        showToast('balance add successful!',"success");
       } else {
-        alert('Failed to add balance')
+        showToast('Failed to add balance', "error")
       }
   } catch (e){
       console.log(e.message)
@@ -427,9 +448,9 @@ export async function payCommission(paycommission){
       const data = await response.json();
       if (response.ok) {
         console.log(data);
-        alert('balance add successful!');
+        showToast('commission add successful!',"success");
       } else {
-        alert('Failed to add balance')
+        showToast('Failed to add commission', "error")
       }
   } catch (e){
       console.log(e.message)

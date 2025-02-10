@@ -13,7 +13,7 @@ const AddOwnRequiremnt = () => {
     const [requirmentType, setRequirmentType] = React.useState([]);
     const [selectedFile, setSelectedFile] = useState(null);
   
-    const [clientName, setClientName] = useState();
+    const [clientName, setClientName] = useState("");
     const [clienPhoneNumber, setClienPhoneNumber] = useState();
     const [adress, setAdress] = useState();
     const [projecttype, setprojecttype] = useState();
@@ -57,25 +57,6 @@ const AddOwnRequiremnt = () => {
   
     async function addRequirment() {
       try {
-        if (!clientName || !clienPhoneNumber || !adress || !projecttype || !requirmentType || !sqft || !room || !message) {
-          alert('Please fill in all the inputs!');
-          return;
-        }
-  
-        if (requirmentType === 'Sell') {
-          if (!price || !installment) {
-            alert('filled input')
-            return;
-          }
-        }
-        if (requirmentType === 'Rent') {
-          if (!advancePayment || !monthlyPayment) {
-            alert('Please fill all the fields');
-            return;
-          }
-        }
-  
-        // If all fields are filled, log the data
         const addrequirment = {
           clientName,
           clienPhoneNumber,
@@ -90,12 +71,31 @@ const AddOwnRequiremnt = () => {
           monthlyPayment,
           advancePayment
         };
-  
+
         await AddOwnrequirments(addrequirment)
+        resetForm(); // ✅ Reset form after successful addition
+     
       } catch (e) {
         alert(e.message);
       }
     }
+
+    const resetForm = () => {
+      setClientName(""); // ✅ Empty string instead of undefined
+      setClienPhoneNumber("");
+      setAdress("");
+      setProjectType("");
+      setSqft("");
+      setRoom("");
+      setMessage("");
+      setAdvancePayment("");
+      setMonthlyPayment("");
+      setPrice("");
+      setRequirmentType("");
+      setInstallment("");
+      setSelectedFile(null);
+    };
+    
   
   return (
     <div>
@@ -126,7 +126,7 @@ const AddOwnRequiremnt = () => {
                 alignItems: 'center',
                 flexDirection: 'column',
                 backgroundColor: '#fafafa',
-                margin: 'auto',
+               margin: 'auto',
               }}
             >
               <CloudUploadIcon sx={{ fontSize: 40, color: '#8a8a8a' }} />
@@ -148,6 +148,7 @@ const AddOwnRequiremnt = () => {
                 Upload
                 <input
                   type="file"
+                  value={selectedFile}
                   hidden
                   onChange={handleFileChange}
                 />
@@ -166,6 +167,7 @@ const AddOwnRequiremnt = () => {
             <OutlinedInput placeholder="Enter Client Name"
               fullWidth
               type='string'
+              value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               sx={{
                 height: '35px',
@@ -183,6 +185,7 @@ const AddOwnRequiremnt = () => {
             <OutlinedInput placeholder="Enter Client Name"
               fullWidth
               type='number'
+              value={clienPhoneNumber}
               onChange={(e) => setClienPhoneNumber(e.target.value)}
               sx={{
                 height: '35px',
@@ -201,6 +204,7 @@ const AddOwnRequiremnt = () => {
             <OutlinedInput placeholder="Enter Required Location"
               fullWidth
               type='string'
+              value={adress}
               onChange={(e) => setAdress(e.target.value)}
               sx={{
                 height: '35px',
@@ -280,7 +284,9 @@ const AddOwnRequiremnt = () => {
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
                 <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Add Price</Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Price" type="number"
+                  <OutlinedInput
+                  value={price}
+                  fullWidth placeholder="Enter Price" type="number"
                     onChange={(e) => setPrice(e.target.value)}
                     sx={{
                       height: '35px',
@@ -292,8 +298,11 @@ const AddOwnRequiremnt = () => {
                   />
                 </Box>
                 <Box sx={{ width: '48%' }}>
-                  <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Add Installment</Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Installment" type="number"
+                  <Typography
+                  sx={{ fontWeight: 'bold', color: '#011936' }}>Add Installment</Typography>
+                  <OutlinedInput
+                  value={installment}
+                  fullWidth placeholder="Enter Installment" type="number"
                     onChange={(e) => setInstallment(e.target.value)}
                     sx={{
                       height: '35px',
@@ -311,7 +320,9 @@ const AddOwnRequiremnt = () => {
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
                 <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Advance Payment</Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Advance Payment" type="number"
+                  <OutlinedInput
+                  value={advancePayment}
+                  fullWidth placeholder="Enter Advance Payment" type="number"
                     onChange={(e) => setAdvancePayment(e.target.value)}
                     sx={{
                       height: '35px',
@@ -324,7 +335,9 @@ const AddOwnRequiremnt = () => {
                 </Box>
                 <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Monthly Rent</Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Monthly Rent" type="number"
+                  <OutlinedInput
+                  value={monthlyPayment}
+                  fullWidth placeholder="Enter Monthly Rent" type="number"
                     onChange={(e) => setMonthlyPayment(e.target.value)}
                     sx={{
                       height: '35px',
@@ -346,6 +359,7 @@ const AddOwnRequiremnt = () => {
                 <OutlinedInput placeholder=" Enter SQFT"
                 fullWidth
                   type='number'
+                  value={sqft}
                   onChange={(e) => setSqft(e.target.value)}
                   sx={{
                     height: '35px',
@@ -362,6 +376,7 @@ const AddOwnRequiremnt = () => {
                 </Typography>
                 <OutlinedInput placeholder="Enter  Rooms"
                 fullWidth
+                value={room}
                   type='number'
                   onChange={(e) => setRoom(e.target.value)}
                   sx={{
@@ -387,6 +402,7 @@ const AddOwnRequiremnt = () => {
               fullWidth
               variant="filled"
               type='string'
+              value={message}
               onChange={(e) => setMessage(e.target.value)}
               sx={{
                 height: '90px',

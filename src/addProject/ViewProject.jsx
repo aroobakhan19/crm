@@ -283,7 +283,7 @@ const ViewProject = () => {
                   <TableCell>{row.Location}</TableCell>
                   <TableCell>0{row.projectNumber}</TableCell>
                   <TableCell>{row.BedRoom}</TableCell>
-                  <TableCell>{row.price}</TableCell>
+                  <TableCell>{row.addPrice}</TableCell>
                   <TableCell>
                     <Box sx={{ display: 'flex',gap: 2}}>
                       <RemoveRedEyeOutlinedIcon

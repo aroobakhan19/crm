@@ -210,10 +210,10 @@ const ViewOfficeAvability = () => {
                 <TableCell>{row.ProjectType}</TableCell>
                 <TableCell>{row.requirmentType}</TableCell>
                 <TableCell>0{row.officeAvaibiltyNumber}</TableCell>
-                    <TableCell>{row.projectAdvanceRent?row.projectAdvanceRent:'no Advance'}</TableCell>
+                    <TableCell>{row.addAdvancedPayment?row.addAdvancedPayment:'no Advance'}</TableCell>
                     <TableCell>{row.projectMonthlyRent?row.projectMonthlyRent:'no Monthly Payment'}</TableCell>
               
-                  <TableCell>{row.projectPrice?row.projectPrice:'not price included'}
+                  <TableCell>{row.addPrice?row.addPrice:'not price included'}
                     </TableCell>
                     <TableCell>{new Date(row.createdAt).toLocaleDateString()}</TableCell>
                     <TableCell>

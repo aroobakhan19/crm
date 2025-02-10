@@ -57,24 +57,6 @@ const AddRequirment = () => {
 
   async function addRequirment() {
     try {
-      if (!clientName || !clienPhoneNumber || !adress || !projecttype || !requirmentType || !sqft || !room || !message) {
-        alert('Please fill in all the inputs!');
-        return;
-      }
-
-      if (requirmentType === 'Sell') {
-        if (!price || !installment) {
-          alert('filled input')
-          return;
-        }
-      }
-      if (requirmentType === 'Rent') {
-        if (!advancePayment || !monthlyPayment) {
-          alert('Please fill all the fields');
-          return;
-        }
-      }
-
       // If all fields are filled, log the data
       const addrequirment = {
         clientName,
@@ -92,11 +74,28 @@ const AddRequirment = () => {
       };
 
       await Addrequirments(addrequirment)
+      resetForm()
     } catch (e) {
       alert(e.message);
     }
   }
 
+  const resetForm = () => {
+    setSelectedFile("")
+    setClientName("")
+    setClienPhoneNumber("")
+    setAdress("")
+    setProjectType("")
+    setRequirmentType("")
+    setSqft("")
+    setRoom("")
+    setMessage("")
+    setPrice("")
+    setInstallment("")
+    setAdvancePayment("")
+    setMonthlyPayment("")
+  };
+ 
 
 
 
@@ -153,6 +152,7 @@ const AddRequirment = () => {
                 <input
                   type="file"
                   hidden
+                  value={selectedFile}
                   onChange={handleFileChange}
                 />
               </Button>
@@ -170,6 +170,7 @@ const AddRequirment = () => {
             <OutlinedInput placeholder="Enter Client Name"
               fullWidth
               type='string'
+              value={clientName}
               onChange={(e) => setClientName(e.target.value)}
               sx={{
                 height: '35px',
@@ -187,6 +188,7 @@ const AddRequirment = () => {
             <OutlinedInput placeholder="Enter Client Name"
               fullWidth
               type='number'
+              value={clienPhoneNumber}
               onChange={(e) => setClienPhoneNumber(e.target.value)}
               sx={{
                 height: '35px',
@@ -204,6 +206,7 @@ const AddRequirment = () => {
             </Typography>
             <OutlinedInput placeholder="Enter Required Location"
               fullWidth
+              value={adress}
               type='string'
               onChange={(e) => setAdress(e.target.value)}
               sx={{
@@ -282,7 +285,9 @@ const AddRequirment = () => {
                 <Typography sx={{ fontWeight: 'bold', color: '#011936' }} variant="body1">
                   Add Price
                 </Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Price" type="number"
+                  <OutlinedInput 
+                  value={price}
+                  fullWidth placeholder="Enter Price" type="number"
                     onChange={(e) => setPrice(e.target.value)}
                     sx={{
                       height: '35px',
@@ -295,7 +300,9 @@ const AddRequirment = () => {
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }} variant="body1">
                     Add Installment
                   </Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Installment" type="number"
+                  <OutlinedInput
+                  value={installment}
+                  fullWidth placeholder="Enter Installment" type="number"
                     onChange={(e) => setInstallment(e.target.value)}
                     sx={{
                       height: '35px',
@@ -313,7 +320,9 @@ const AddRequirment = () => {
                 <Typography sx={{ fontWeight: 'bold', color: '#011936' }} variant="body1">
                   Advance Payment
                 </Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Advance Payment" type="number"
+                  <OutlinedInput
+                  value={advancePayment}
+                  fullWidth placeholder="Enter Advance Payment" type="number"
                     onChange={(e) => setAdvancePayment(e.target.value)}
                     sx={{
                       height: '35px',
@@ -326,7 +335,9 @@ const AddRequirment = () => {
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }} variant="body1">
                     Monthly Rent
                   </Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Monthly Rent" type="number"
+                  <OutlinedInput 
+                  value={monthlyPayment}
+                  fullWidth placeholder="Enter Monthly Rent" type="number"
                     onChange={(e) => setMonthlyPayment(e.target.value)}
                     sx={{
                       height: '35px',
@@ -346,6 +357,7 @@ const AddRequirment = () => {
                 </Typography>
                 <OutlinedInput placeholder=" Enter SQFT"
                   type='number'
+                  value={sqft}
                   fullWidth
                   onChange={(e) => setSqft(e.target.value)}
                   sx={{
@@ -361,6 +373,7 @@ const AddRequirment = () => {
                 </Typography>
                 <OutlinedInput placeholder="Enter  Rooms"
                   type='number'
+                  value={room}
                   fullWidth
                   onChange={(e) => setRoom(e.target.value)}
                   sx={{
@@ -384,6 +397,7 @@ const AddRequirment = () => {
               fullWidth
               variant="filled"
               type='string'
+              value={message}
               onChange={(e) => setMessage(e.target.value)}
               sx={{
                 '& .MuiFilledInput-root': { backgroundColor: '#fafafa' },

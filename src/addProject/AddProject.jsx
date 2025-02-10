@@ -46,11 +46,7 @@ const AddProject = () => {
 
 async function addProject(){
     try {
-      if (!projectTitle || !projectType || !bedroom || !bathroom || !sqft || !price || !address || !state || !country || !zipCode) {
-        alert('Please fill in all the inputs!');
-        return;
-      }
-
+ 
          // If all fields are filled, log the data
          const  addproject = {
           projectTitle,
@@ -67,10 +63,25 @@ async function addProject(){
         };
         
        await Addproject(addproject)
+       resetForm();
       } catch(e) {
         alert(e.message);
       }
   }
+
+  const resetForm = () => {
+    setSelectedFile("")
+    setProjectTitle("")
+    setProjectType("")
+    setBedroom("")
+    setBathroom("")
+    setSqft("")
+    setPrice("")
+    setAddress("")
+    setState("")
+    setCountry("")
+    setZipCode("")
+      };
 
   return (
     <div>
@@ -123,6 +134,7 @@ async function addProject(){
         Upload
         <input
           type="file"
+          value={selectedFile}
           hidden
           onChange={handleFileChange}
         />
@@ -139,6 +151,7 @@ async function addProject(){
         </Typography>
         <OutlinedInput placeholder="Please enter text" 
         fullWidth
+        value={projectTitle}
         type='string'
         onChange={(e) => setProjectTitle(e.target.value)}
         sx={{
@@ -190,6 +203,7 @@ Bedroom*
         onChange={(e) => setBedroom(e.target.value)}
         type='number'
         fullWidth
+        value={bedroom}
         sx={{
           height: '35px',
           '&:hover': { borderColor: '#011936' },
@@ -204,6 +218,7 @@ Bedroom*
         Bathroom*
         </Typography>
         <OutlinedInput placeholder="Enter Bathroom " 
+        value={bathroom}
       sx={{
         height: '35px',
         '&:hover': { borderColor: '#011936' },
@@ -225,6 +240,7 @@ fullWidth
 SQFT
         </Typography>
         <OutlinedInput placeholder=" Enter SQFT" 
+        value={sqft}
              sx={{
               height: '35px',
               '&:hover': { borderColor: '#011936' },
@@ -242,6 +258,7 @@ SQFT
         Price
         </Typography>
         <OutlinedInput placeholder="Enter Price " 
+        value={price}
             sx={{
               height: '35px',
               '&:hover': { borderColor: '#011936' },
@@ -261,6 +278,7 @@ SQFT
         </Typography>
         <OutlinedInput placeholder="Please enter Street Address" 
         onChange={(e) => setAddress(e.target.value)}
+        value={address}
         fullWidth
         sx={{
           height: '35px',
@@ -286,6 +304,7 @@ State
         fontFamily: 'Arial, sans-serif',
         fontSize: '14px',
       }}
+      value={state}
         onChange={(e) => setState(e.target.value)}
         />
         </Box>
@@ -301,6 +320,7 @@ Country
         fontFamily: 'Arial, sans-serif',
         fontSize: '14px',
       }}
+      value={country}
         onChange={(e) => setCountry(e.target.value)}
         />
         </Box>
@@ -316,6 +336,7 @@ Country
     fontFamily: 'Arial, sans-serif',
     fontSize: '14px',
   }}
+  value={zipCode}
         onChange={(e) => setZipCode(e.target.value)}
         />
         </Box>

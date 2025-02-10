@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {
-  Box, Typography, Button, Select, MenuItem, TableContainer, Table, TableHead, TableRow, TableCell, TableBody,
+  Box, Typography, OutlinedInput,Button, Select, MenuItem, TableContainer, Table, TableHead, TableRow, TableCell, TableBody,
   TablePagination, Paper, TextField, Toolbar, Divider, IconButton, Grid, CircularProgress
 } from '@mui/material';
 import FilterListIcon from '@mui/icons-material/FilterList';
@@ -16,31 +16,65 @@ const RequirementReport = () => {
   const [reportData, setReportData] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0); 
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState('');
+  const [filteredData, setFilteredData] = useState([]);
   const [page, setPage] = useState(0);
   const [rowsPerPage, setRowsPerPage] = useState(5);
-  const [expandedRow, setExpandedRow] = useState(null); 
+  const [expandedRow, setExpandedRow] = useState(null);
+    const [requirmentNo, setRequirmentNo] = useState('');
+                      const [propertyType, setPropertyType] = useState('');
+                       const [projectLocation, setProjectLocation] = useState(''); 
 
-  useEffect(() => {
-    const fetchReportData = async () => {
-      setLoading(true);
-      try {
+useEffect(() => {
+        fetchReportData();
+      }, []);
+                    useEffect(() => {
+                      applyFilters();
+                    }, [requirmentNo, projectLocation,reportData,propertyType]);
+  
+    async function fetchReportData() {
+       try {
         const response = await axios.get('https://crm-backend-plum.vercel.app/report/requirementReport');
         setReportData(response.data.report);
-        setTotalPrice(response.data.totalPrice);
+        setTotalPrice(response.data.totalAmount);
+        setFilteredData(response.data.report);
       } catch (error) {
         console.error('Error fetching report data:', error);
       } finally {
         setLoading(false);
       }
     };
-    fetchReportData();
-  }, []);
+
   console.log(reportData)
 
-  const handleFilterChange = (event) => {
-    setFilter(event.target.value);
+  const applyFilters = () => {
+    let filtered = [...reportData];
+
+    // Filter by Property Name
+    if (requirmentNo) {
+      filtered = filtered.filter((row) =>
+        row.requirmentNumber.toString().toLowerCase().includes(requirmentNo.toLowerCase())
+      );
+    }
+    
+
+    // Filter by Property Type
+    if (propertyType) {
+      filtered = filtered.filter((row) =>
+        row.requirmentType.toLowerCase().includes(propertyType.toLowerCase())
+      );
+    }
+
+    // Filter by Property Range (example logic)
+    if (projectLocation) {
+      filtered = filtered.filter((item) =>
+        item.Location.toLowerCase().includes(projectLocation.toLowerCase())
+      );
+    }
+
+    setFilteredData(filtered);
   };
+  console.log(filteredData); // ✅ Check if filteredData is updating
+
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -51,7 +85,6 @@ const RequirementReport = () => {
     setPage(0);
   };
 
-  const filteredData = filter ? reportData.filter(item => item._id.requirmentType === filter) : reportData;
 
 
   const handleRowClick = (index) => {
@@ -98,31 +131,39 @@ const RequirementReport = () => {
 
           <Paper sx={{ p:1, mb: 2, borderRadius: 2, boxShadow: '0 8px 16px rgba(0, 0, 0, 0.15)' }}>
           <Toolbar sx={{ display: 'flex', justifyContent: 'space-between', gap: 2 }}>
-          <Grid container spacing={2}>
-            <Grid item xs={12} sm={6} md={4}>
-              <Select
-                value={filter}
-                onChange={handleFilterChange}
-                displayEmpty
-                variant="outlined"
-                sx={{ minWidth: 150, backgroundColor: 'white', borderRadius: 1 }}
-              >
-                <MenuItem value=""><em>All</em></MenuItem>
-                <MenuItem value="Sell">Sell</MenuItem>
-                <MenuItem value="Rent">Rent</MenuItem>
-              </Select>
-            </Grid>
-            <Grid item xs={12} sm={6} md={4}>
-              <TextField
-                placeholder="Search by Client or Status..."
-                size="small"
-                variant="outlined"
-                fullWidth
-                sx={{ bgcolor: '#f0f0f0', borderRadius: 1 }}
-              />
-            </Grid>
-          </Grid>
+          <Box sx={{ display: 'flex', ml: { xs: 0, md: '2%' }, width: '70%' }}>
+            <Select
+              sx={{ ml: 1, backgroundColor: '#F5F5F5', borderRadius: 2 }}
+          value={propertyType}
+          onChange={(e) => setPropertyType(e.target.value)}
+          displayEmpty
+          input={<OutlinedInput fullWidth />}
+        >
+          <MenuItem value="">
+            <em>Select Property Requirement</em>
+          </MenuItem>
+          <MenuItem value="sell">Sell</MenuItem>
+          <MenuItem value="rent">Rent</MenuItem>
+        </Select>
 
+
+                 <OutlinedInput
+                     placeholder="Enter Property Location"
+                     sx={{ ml: 1, backgroundColor: '#F5F5F5', borderRadius: 2 }}
+                     fullWidth
+                     type="text"
+                     value={projectLocation}
+                     onChange={(e) => setProjectLocation(e.target.value)}
+                   />
+                             <OutlinedInput
+                     placeholder="Enter requirment number"
+                     sx={{ ml: 1, backgroundColor: '#F5F5F5', borderRadius: 2 }}
+                     fullWidth
+                     type="number"
+                     value={requirmentNo}
+                     onChange={(e) => setRequirmentNo(e.target.value)}
+                   />
+          </Box>
           <Box>
             <IconButton sx={{color:'#011936'}} onClick={downloadTable}>
               <DownloadIcon />
@@ -152,23 +193,25 @@ const RequirementReport = () => {
               <TableRow>
               <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white' }}>Requirement Type</TableCell>
                       <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white'}}>Status</TableCell>
-                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white'}}>Total Requirement</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white'}}> Requirement No</TableCell>
                       <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white' }}>Total Price</TableCell>
                       <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white' }}>Client Name</TableCell>
                       <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white' }}>Posted By</TableCell>
+                      <TableCell sx={{ fontWeight: 'bold', textAlign: 'center' ,color: 'white' }}>Location</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
-              {filteredData.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
+              {filteredData?.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage).map((row, index) => (
                 <>
                   <TableRow key={index} onClick={() => handleRowClick(index)}>
-                    <TableCell align="center">{row._id.requirmentType}</TableCell>
-                    <TableCell align="center">{row._id.status}</TableCell>
-                    <TableCell align="center">{row.totalCount}</TableCell>
-                    <TableCell align="center">{row.totalPrice}</TableCell>
+                    <TableCell align="center">{row.requirmentType}</TableCell>
+                    <TableCell align="center">{row.status}</TableCell>
+                    <TableCell align="center">{row.requirmentNumber}</TableCell>
+                    <TableCell align="center">{row.priceOrRent}</TableCell>
                     {/* <TableCell align="center">{row.averagePrice.toFixed(2)}</TableCell> */}
-                    <TableCell align="center">{row._id.clientName}</TableCell>
-                    <TableCell align="center">{row._id.postedBy}</TableCell>
+                    <TableCell align="center">{row.clientName}</TableCell>
+                    <TableCell align="center">{row.postedBy}</TableCell>
+                    <TableCell align="center">{row.Location}</TableCell>
                   </TableRow>
                   {expandedRow === index && (
                     <TableRow>

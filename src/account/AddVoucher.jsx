@@ -67,11 +67,11 @@ const voucherData = location.state || {};
       console.log("Sending payload:", addexpense);
       await AddExpense(addexpense);
   
-      alert("Expenses added successfully!");
+      // alert("Expenses added successfully!");
       setExpenses([]); // Clear the expenses after submission
     } catch (e) {
       console.error("Error in submitting expenses:", e.message);
-      alert(e.message);
+      // alert(e.message);
     } finally {
       setLoading(false);
     }
