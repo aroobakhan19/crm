@@ -3,6 +3,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import Header from "../components/Header";
+import AccountantHeader from "../components/AccountantHeader";
 import { useParams } from "react-router-dom";
 
 const PayableDescription = () => {
@@ -10,6 +11,15 @@ const PayableDescription = () => {
     const reportRef = useRef();
 const [expenseDetail,setExpenseDetail] = useState('')
 const [totalAmount, setTotalAmount] = useState(0);
+  const [role, setRole] = useState('');
+                            
+                              useEffect(() => {
+                                // Decode role from user in localStorage
+                                const user = JSON.parse(localStorage.getItem('user'));
+                                if (user && user.role) {
+                                  setRole(user.role);
+                                }
+                              }, []);
 
 useEffect(() => {
    fetchExpenses();
@@ -46,7 +56,11 @@ useEffect(() => {
 
   return (
     <div>
-      <Header />
+              {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
         <div style={{marginLeft:'250px',marginTop:'120px'}}>
 <div ref={reportRef} style={{ padding: "20px", fontFamily: "Arial" }}>
         <h1 style={{ textAlign: "center", marginBottom: "20px" }}>GROW PROPERTIES</h1>

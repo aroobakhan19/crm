@@ -11,6 +11,7 @@ import axios from 'axios';
 import * as XLSX from 'xlsx';
 import html2pdf from 'html2pdf.js';
 import Header from '../components/Header';
+import AccountantHeader from "../components/AccountantHeader";
 
 const OfficeReport = () => {
     const [officeReportData, setOfficeReportData] = useState([])
@@ -22,6 +23,15 @@ const OfficeReport = () => {
                     const [avaibilityNumber, setAvaibilityNumber] = useState('');
                     const [propertyType, setPropertyType] = useState('');
                      const [projectType, setProjectType] = useState('');
+                       const [role, setRole] = useState('');
+                                                                    
+                                                                      useEffect(() => {
+                                                                        // Decode role from user in localStorage
+                                                                        const user = JSON.parse(localStorage.getItem('user'));
+                                                                        if (user && user.role) {
+                                                                          setRole(user.role);
+                                                                        }
+                                                                      }, []);
 
   useEffect(() => {
         fetchReportData();
@@ -118,7 +128,11 @@ const OfficeReport = () => {
 
     return (
         <div>
-            <Header />
+                  {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
             <Box sx={{ mt: '5%', ml: '17%' }}>
                 <Box sx={{ p: 4, backgroundColor: '#f5f5f5', minHeight: '100vh', fontFamily: 'Roboto, sans-serif' }}>
                     <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 3, color: '#333' }}>

@@ -1,6 +1,5 @@
 import React,{useEffect,useContext,useState} from 'react';
 import AccountantHeader from '../components/AccountantHeader';
-import Cards from '../components/Cards';
 import './chart.css'
 import { BarChart } from '@mui/x-charts/BarChart';
 import { Box, Card, CardContent, Container, Typography,TextField,Button,Table, TableBody, TableCell, TableContainer, TableHead, TableRow} from '@mui/material';
@@ -36,12 +35,43 @@ const otherSetting = {
 
 
 const Accountant = () => {
+    const [employeeName, setEmployeeName] = useState("");
+
+    const token = localStorage.getItem('tokens');
+      
+      useEffect(() => {
+        if (token) {
+            fetchUserName();
+        }
+    }, []);
+    
+
+  const fetchUserName = async () => {
+    const response = await fetch('https://crm-backend-plum.vercel.app/users/getUserByToken', {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`
+        }
+    });
+    const data = await response.json();
+    if (response.ok) {
+        setEmployeeName(data.name);
+    } else {
+        console.log('Error fetching user name:', data.message);
+    }
+  };
+  
   return (
     <div>
+      
       <Box sx={{background:'#f7f7f7'}}>
       <AccountantHeader />
 
-      <Cards />
+     <Box sx={{background:"linear-gradient(#1982C4, #0B3948)", mt:"4%", ml:'17%', height:{xs:0, md:280}}}>
+               <Typography variant='h4' sx={{ml:5,pt:5,color:'white'}}>
+                 Welcome  {    employeeName}
+               </Typography>
+               </Box>
 
       <Box sx={{display:'flex',flexDirection:{xs:'column',md:'row'},width:'100%'}}>
 

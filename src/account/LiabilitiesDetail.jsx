@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import AccountantHeader from "../components/AccountantHeader";
+import Header from "../components/Header";
 import {
   Typography,
   Box,
@@ -23,6 +25,15 @@ const LiabilitiesDetail = () => {
   const [loading, setLoading] = useState(true);
   const [commissionHistory, setCommissionHistory] = useState([]);
   const [error, setError] = useState("");
+                   const [role, setRole] = useState('');
+                                               
+                                                 useEffect(() => {
+                                                   // Decode role from user in localStorage
+                                                   const user = JSON.parse(localStorage.getItem('user'));
+                                                   if (user && user.role) {
+                                                     setRole(user.role);
+                                                   }
+                                                 }, []);
 
   useEffect(() => {
     const fetchDetails = async () => {
@@ -74,6 +85,13 @@ const LiabilitiesDetail = () => {
   }
 
   return (
+    <>
+                {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
+
     <Box
       sx={{
         display: "flex",
@@ -83,6 +101,7 @@ const LiabilitiesDetail = () => {
         minHeight: "100vh",
         padding: "2rem",
         backgroundColor: "#f5f5f5",
+        mt:10
       }}
     >
       <Paper
@@ -146,6 +165,7 @@ const LiabilitiesDetail = () => {
         )}
       </Paper>
     </Box>
+    </>
   );
 };
 

@@ -105,6 +105,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import { AddExpense } from "../config/db";
 import Header from "../components/Header";
+import AccountantHeader from "../components/AccountantHeader";
 import {OutlinedInput} from '@mui/material'
 
 const AddExpenseModal = () => {
@@ -115,6 +116,16 @@ const AddExpenseModal = () => {
   const [expenses, setExpenses] = useState([]); // Array to store multiple expenses
   const [loading, setLoading] = useState(false);
   const [voucherNumber, setVoucherNumber] = useState();
+
+  const [role, setRole] = useState('');
+    
+      useEffect(() => {
+        // Decode role from user in localStorage
+        const user = JSON.parse(localStorage.getItem('user'));
+        if (user && user.role) {
+          setRole(user.role);
+        }
+      }, []);
 
   // Add a new empty expense row
   const addExpenseRow = () => {
@@ -202,7 +213,11 @@ useEffect(() => {
   
   return (
     <div>
-      <Header />
+        {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
       {/* Controls */}
       <div style={{ marginLeft: "250px", marginTop: "120px" }}>
         <div style={{ marginBottom: "20px" }}>

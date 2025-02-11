@@ -50,7 +50,7 @@ const AccountantHeader = () => {
     };
   
     const menuItems = [
-      { text: 'Dashboard', icon: <DashboardIcon />, link: '/EmployeeAndAgentDashboard' },
+      { text: 'Dashboard', icon: <DashboardIcon />, link: '/Accountant' },
       {
         text: 'ledgers', icon: <MeetingRoomIcon />,
         isDropdown: true,
@@ -61,28 +61,27 @@ const AccountantHeader = () => {
           { text: 'Payable', link: '/ViewPayable' },
         ].filter(Boolean),
       },
-      { text: 'Add Sell Item', icon: <ReportIcon />, link: '/AddSellProperty' },
-      { text: 'View Sell Item', icon: <ReportIcon />, link: '/ViewSellItem' },
       // { text: 'Report', icon: <ReportIcon />, link: '/Report' },
-      {
-        text: 'Report', icon: <MeetingRoomIcon />,
-        isDropdown: true,
-        dropdownItems: [
-          { text: 'View requirment report', link: '/RequirementReport' },
-          { text: 'View Project Report', link: '/ProjectReport' },
-         { text: 'Voucher report', link: '/VoucherReport' },
-         { text: 'Balance sheet report', link: '/BalanceSheet' },
-         { text: 'Bank Balance sheet report', link: '/BankBalanceSheet' },
+      // {
+      //   text: 'Report', icon: <MeetingRoomIcon />,
+      //   isDropdown: true,
+      //   dropdownItems: [
+          { text: 'View requirment report', link: '/RequirementReport',icon: <MeetingRoomIcon /> },
+          { text: 'View Project Report', link: '/ProjectReport',icon: <MeetingRoomIcon /> },
+         { text: 'Voucher report', link: '/VoucherReport',icon: <MeetingRoomIcon /> },
+         { text: 'Balance sheet report', link: '/BalanceSheet',icon: <MeetingRoomIcon /> },
+         { text: 'Bank Balance sheet report', link: '/BankBalanceSheet',icon: <MeetingRoomIcon /> },
          { 
           text: 'avability report',
+          icon: <MeetingRoomIcon />,
           isDropdown: true,
           dropdownItems: [  
             { text: 'Developer report', link: '/AvaibilityReport' },
             { text: 'Office Report', link: '/OfficeReport' },
           ].filter(Boolean),
         },
-        ].filter(Boolean),
-      },
+      //   ].filter(Boolean),
+      // },
       {
         text: 'Account', icon: <MeetingRoomIcon />,
         isDropdown: true,
@@ -150,37 +149,6 @@ const AccountantHeader = () => {
  <Box sx={{ flexGrow: 1 }} />
  {/* <Box sx={{ flexGrow: 0 }}> */}
  <Stack direction="row" spacing={2}>
-     <Button
-       variant="contained"
-       sx={{
-         width: '150px', // Set fixed width for the "Add Sell" button
-         pr: 2,
-         color: 'white',
-         backgroundColor: '#1982C4',
-         '&:hover': {
-           backgroundColor: '#155f7a',
-         },
-       }}
-       onClick={() => navigate('/AddSellProperty')}
-     >
-       Add Sell
-     </Button>
-
-     <Button
-       variant="contained"
-       sx={{
-         width: '120px', // Set fixed width for the "Add" button
-         pl: 3,
-         backgroundColor: '#1982C4',
-             '&:hover': {
-               backgroundColor: '#155f7a',
-             },
-             color: 'white',
-       }}
-       onClick={handleClick}
-     >
-       Add
-     </Button>
    </Stack>
 
    <Menu

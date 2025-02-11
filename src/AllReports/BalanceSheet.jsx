@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Header from '../components/Header';
+import AccountantHeader from "../components/AccountantHeader";
 import { useNavigate } from "react-router-dom";
 import {
   Typography,
@@ -18,6 +19,16 @@ function BalanceSheet() {
   const [reportData, setReportData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+    const [role, setRole] = useState('');
+                                             
+                                               useEffect(() => {
+                                                 // Decode role from user in localStorage
+                                                 const user = JSON.parse(localStorage.getItem('user'));
+                                                 if (user && user.role) {
+                                                   setRole(user.role);
+                                                 }
+                                               }, []);
+  
 
   useEffect(() => {
     const fetchReport = async () => {
@@ -47,7 +58,11 @@ function BalanceSheet() {
 
   return (
     <div>
-      <Header />
+            {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
     <Box
     sx={{
       display: "flex",

@@ -1,5 +1,6 @@
-import React, { useState } from "react";
+import React, { useState,useEffect} from "react";
 import Header from '../components/Header';
+import AccountantHeader from "../components/AccountantHeader";
 import {
   Typography,
   Box,
@@ -20,6 +21,17 @@ import {
 const BankBalanceSheet = () => {
   const [selectedBank, setSelectedBank] = useState("");
   const [bankBalanceReport, setBankBalanceReport] = useState(null);
+  const [role, setRole] = useState('');
+                                               
+                                                 useEffect(() => {
+                                                   // Decode role from user in localStorage
+                                                   const user = JSON.parse(localStorage.getItem('user'));
+                                                   if (user && user.role) {
+                                                     setRole(user.role);
+                                                   }
+                                                 }, []);
+    
+  
 
   const fetchBankBalanceReport = async () => {
     try {
@@ -35,7 +47,11 @@ const BankBalanceSheet = () => {
 
   return (
     <div>
-       <Header />
+            {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
 <Box
       sx={{
         display: "flex",

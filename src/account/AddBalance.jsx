@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState} from 'react'
 import {Modal,Paper,TextField,Button,Box,Typography} from '@mui/material'
 import Header from '../components/Header'
 import { Addbalance } from '../config/db'

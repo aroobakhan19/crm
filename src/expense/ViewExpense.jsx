@@ -78,6 +78,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
+import AccountantHeader from "../components/AccountantHeader";
 import { TableRow, Box, Table, TableContainer, TableHead, TableBody, TableCell, OutlinedInput, Select, MenuItem,Button} from '@mui/material';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
 import RestoreFromTrashOutlinedIcon from '@mui/icons-material/RestoreFromTrashOutlined';
@@ -89,6 +90,15 @@ const ViewExpense = () => {
   const [descriptionFilter, setDescriptionFilter] = useState('');
   const [categoryFilter, setCategoryFilter] = useState('');
   const [dateFilter, setDateFilter] = useState('');
+        const [role, setRole] = useState('');
+            
+              useEffect(() => {
+                // Decode role from user in localStorage
+                const user = JSON.parse(localStorage.getItem('user'));
+                if (user && user.role) {
+                  setRole(user.role);
+                }
+              }, []);
 
   useEffect(() => {
     getExpenses();
@@ -136,7 +146,11 @@ const ViewExpense = () => {
   
   return (
     <div>
-      <Header />
+            {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
       <Box sx={{ display: 'flex', ml: { xs: 0, md: '25%' }, mt: { md: 12, xs: 10 }, width: '70%' }}>
         <OutlinedInput
           placeholder="Filter by Description"

@@ -5,6 +5,7 @@ import { AddExpense } from "../config/db";
 import Header from "../components/Header";
 import {OutlinedInput,Button} from '@mui/material'
 import { useLocation } from "react-router-dom";
+import AccountantHeader from "../components/AccountantHeader";
 
 const AddVoucher = () => {
   const reportRef = useRef();
@@ -18,6 +19,15 @@ const voucherData = location.state || {};
   const [voucherNumber, setVoucherNumber] = useState();
   const [employeeId, setEmployeeId] = useState(voucherData.employeeId || "");
   const [selectedBank,setSelectedBank] = useState('')
+                 const [role, setRole] = useState('');
+                                             
+                                               useEffect(() => {
+                                                 // Decode role from user in localStorage
+                                                 const user = JSON.parse(localStorage.getItem('user'));
+                                                 if (user && user.role) {
+                                                   setRole(user.role);
+                                                 }
+                                               }, []);
 
   // Add a new empty expense row
   const addExpenseRow = () => {
@@ -111,7 +121,11 @@ useEffect(() => {
 
   return (
     <div>
-       <Header />
+                 {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
       {/* Controls */}
       <div style={{ marginLeft: "250px", marginTop: "120px" }}>
         <div style={{ marginBottom: "20px" }}>
