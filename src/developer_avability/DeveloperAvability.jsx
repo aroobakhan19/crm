@@ -42,28 +42,6 @@ const DeveloperAvability = () => {
     };
     const addDeveloperAvability = async() => {
       try {
-        console.log("requirmentType value:", requirmentType); // Log the value of requirmentType
-        
-        // Check if all the necessary fields are filled
-        if (!clientName || !clientPhoneNumber || !propertyDescription || !adress || !projectTitle || !projectType || !requirmentType || !room || !sqft) {
-          alert('Please fill all the fields');
-          return;
-        }
-        
-        // Check if the requirement type is 'Sell'
-        if (requirmentType === 'Sell') {
-          // Check if the price is filled
-          if (!price || !installment) {
-          alert('filled input') // Should log 'sell' if requirmentType is 'Sell'return;
-        return;
-        }
-      }
-      if (requirmentType === 'Rent'){
-        if (!advancePayment || !monthlyPayment) {
-          alert('Please fill all the fields');
-          return;
-        }
-      }
       const adddeveloperavability = {
         clientName,
         clientPhoneNumber,
@@ -81,13 +59,26 @@ const DeveloperAvability = () => {
         message
       }
       await AddDeveloperAvability(adddeveloperavability)
+      resetForm()
       } catch (error) {
         console.error('Error:', error);
       }
-      
     }      
 
-
+    const resetForm = () => {
+      setSelectedFile("")
+      setClientName("")
+      setClientPhoneNumber("")
+      setPropertyDescription("")
+      setAdress("")
+      setProjectTitle("")
+      setProjectType("")
+      setRequirmentType("")
+      setRoom("")
+      setSqft("")
+      setMessage("")
+        };
+  
 
   return (
     <div>
@@ -129,6 +120,7 @@ const DeveloperAvability = () => {
         Upload
         <input
           type="file"
+          value={selectedFile}
           hidden
           onChange={handleFileChange}
         />
@@ -147,6 +139,7 @@ const DeveloperAvability = () => {
         <OutlinedInput placeholder="Enter Client Name" 
         fullWidth
         type='string'
+        value={clientName}
         onChange={(e) => setClientName(e.target.value)}
         sx={{
           height: '35px',
@@ -164,6 +157,7 @@ const DeveloperAvability = () => {
         <OutlinedInput placeholder="Enter Client Phone Number" 
         fullWidth
         type='number'
+        value={clientPhoneNumber}
         onChange={(e) => setClientPhoneNumber(e.target.value)}
         sx={{
           height: '35px',
@@ -183,6 +177,7 @@ const DeveloperAvability = () => {
         <OutlinedInput placeholder="Enter  Property Description" 
         fullWidth
         type='string'
+        value={propertyDescription}
         onChange={(e) => setPropertyDescription(e.target.value)}
         sx={{
           height: '35px',
@@ -200,6 +195,7 @@ const DeveloperAvability = () => {
         <OutlinedInput placeholder="Enter  Property Location" 
         fullWidth
         type='string'
+        value={adress}
         onChange={(e) => setAdress(e.target.value)}
         sx={{
           height: '35px',
@@ -217,6 +213,7 @@ const DeveloperAvability = () => {
         </Typography>
         <OutlinedInput placeholder="Enter  Property Name" 
         fullWidth
+        value={projectTitle}
         type='string'
         onChange={(e) => setProjectTitle(e.target.value)}
         sx={{
@@ -235,6 +232,7 @@ const DeveloperAvability = () => {
         <OutlinedInput placeholder="Enter  Property Type" 
         fullWidth
         type='string'
+        value={projectType}
         onChange={(e) => setProjectType(e.target.value)}
         sx={{
           height: '35px',
@@ -278,6 +276,7 @@ const DeveloperAvability = () => {
         <OutlinedInput placeholder="Enter Rooms" 
         fullWidth
         type='string'
+        value={room}
         onChange={(e) => setRoom(e.target.value)}
         sx={{
           height: '35px',
@@ -295,7 +294,9 @@ const DeveloperAvability = () => {
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
               <Box sx={{ width: '48%' }}>
                 <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Add Price</Typography>
-                <OutlinedInput fullWidth placeholder="Enter Price" type="number"
+                <OutlinedInput
+                value={price}
+                fullWidth placeholder="Enter Price" type="number"
                   onChange={(e) => setPrice(e.target.value)}
                   sx={{
                     height: '35px',
@@ -308,7 +309,9 @@ const DeveloperAvability = () => {
                   </Box>
                   <Box sx={{ width: '48%' }}>
                   <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Add Installment</Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Installment" type="number"
+                  <OutlinedInput
+                  value={installment}
+                  fullWidth placeholder="Enter Installment" type="number"
                   onChange={(e) => setInstallment(e.target.value)}
                   sx={{
                     height: '35px',
@@ -326,7 +329,9 @@ const DeveloperAvability = () => {
               <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
               <Box sx={{ width: '48%' }}>
                 <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Advance Payment</Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Advance Payment" type="number"
+                  <OutlinedInput 
+                  value={advancePayment}
+                  fullWidth placeholder="Enter Advance Payment" type="number"
                   onChange={(e) => setAdvancePayment(e.target.value)}
                   sx={{
                     height: '35px',
@@ -339,7 +344,9 @@ const DeveloperAvability = () => {
                 </Box>
                 <Box sx={{ width: '48%' }}>
                 <Typography sx={{ fontWeight: 'bold', color: '#011936' }}>Monthly Rent</Typography>
-                  <OutlinedInput fullWidth placeholder="Enter Monthly Rent" type="number"
+                  <OutlinedInput
+                  value={monthlyPayment}
+                  fullWidth placeholder="Enter Monthly Rent" type="number"
                   onChange={(e) => setMonthlyPayment(e.target.value)}
                   sx={{
                     height: '35px',
@@ -359,6 +366,7 @@ const DeveloperAvability = () => {
         </Typography>
         <OutlinedInput placeholder="Enter  Property Sqft" 
         fullWidth
+        value={sqft}
         type='string'
         onChange={(e) => setSqft(e.target.value)}
         sx={{
@@ -379,6 +387,7 @@ const DeveloperAvability = () => {
           placeholder="Enter Message here"
           multiline
           rows={1}
+          value={message}
           fullWidth
           variant="filled"
           type='string'

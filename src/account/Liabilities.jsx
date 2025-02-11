@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Header from '../components/Header';
+import AccountantHeader from "../components/AccountantHeader";
 import { useNavigate } from 'react-router-dom';
 import { Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Typography, Box } from '@mui/material';
 import RemoveRedEyeOutlinedIcon from '@mui/icons-material/RemoveRedEyeOutlined';
@@ -10,6 +11,15 @@ const Liabilities = () => {
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+                   const [role, setRole] = useState('');
+                                               
+                                                 useEffect(() => {
+                                                   // Decode role from user in localStorage
+                                                   const user = JSON.parse(localStorage.getItem('user'));
+                                                   if (user && user.role) {
+                                                     setRole(user.role);
+                                                   }
+                                                 }, []);  
 
     useEffect(() => {
         const fetchLiabilities = async () => {
@@ -29,7 +39,11 @@ const Liabilities = () => {
 
     return (
         <div>
-            <Header />
+                 {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
             <Box sx={{ mt: "10%", ml: "25%" }}>
                 {loading ? (
                     <Typography variant="h6" color="textSecondary">

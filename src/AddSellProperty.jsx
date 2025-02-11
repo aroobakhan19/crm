@@ -18,8 +18,6 @@ const AddSellProperty = () => {
 
     const [buyerClientName,setBuyerClientName] = useState('');
     const [buyerClientPhoneNumber,setBuyerClientPhoneNumber] = useState('');
-    const [clientCnic,setClientCnic] = useState('');
-    const [clientAddress,setClientAddress] = useState('');
     const [propertyAmount,setPropertyAmount] = useState('');
     const [note,setNote] = useState('')
     const [buyerEmployeeName,setBuyerEmployeeName] = useState('');
@@ -108,8 +106,6 @@ const AddSellProperty = () => {
                 receiverEmployeeId: autoFilled.receiverEmployeeId || receiverEmployeeId,
                 buyerClientName,
                 buyerClientPhoneNumber,
-                clientAddress,
-                clientCnic,
                 buyerPropertyAmount: propertyAmount, 
                 note,
                 buyerEmployeeName,
@@ -123,14 +119,14 @@ const AddSellProperty = () => {
                 .filter(([key, value]) => !value)
                 .map(([key]) => key);
     
-            if (missingFields.length > 0) {
-                alert(`Please fill in the following inputs: ${missingFields.join(', ')}`);
-                return;
-            }
+            // if (missingFields.length > 0) {
+            //     alert(`Please fill in the following inputs: ${missingFields.join(', ')}`);
+            //     return;
+            // }
     
             // Proceed with API call
             await AddSell(consolidatedData);
-            alert('Property added successfully!');
+            // alert('Property added successfully!');
             console.log('consolidatedData',consolidatedData)
         } catch (e) {
             alert(`Error: ${e.message}`);
@@ -387,43 +383,7 @@ const AddSellProperty = () => {
                         />
                     </Box>
                 </Box>
-         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
-              <Box sx={{ width: '48%' }}>
-                        <OutlinedInput
-                            value={clientCnic}
-                            onChange={(e) => setClientCnic(e.target.value)}
-                            placeholder="Enter Client NIC"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            sx={{
-                                height: '35px',
-                                '&:hover': { borderColor: '#011936' },
-                                '& .MuiOutlinedInput-notchedOutline': { borderColor: '#d3d3d3' },
-                                fontFamily: 'Arial, sans-serif',
-                                fontSize: '14px',
-                              }}
-                        />
-                    </Box>
-                    <Box sx={{ width: '48%' }}>
-                        <OutlinedInput
-                            value={clientAddress}
-                            onChange={(e) => setClientAddress(e.target.value)}
-                            placeholder="Enter Client Address"
-                            fullWidth
-                            margin="normal"
-                            variant="outlined"
-                            sx={{
-                                height: '35px',
-                                '&:hover': { borderColor: '#011936' },
-                                '& .MuiOutlinedInput-notchedOutline': { borderColor: '#d3d3d3' },
-                                fontFamily: 'Arial, sans-serif',
-                                fontSize: '14px',
-                              }}
-                        />
-                    </Box>
-                </Box>
-         <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
+                 <Box sx={{ display: 'flex', justifyContent: 'space-between', mt: 4 }}>
               <Box sx={{ width: '48%' }}>
                         <OutlinedInput
                             value={propertyAmount}

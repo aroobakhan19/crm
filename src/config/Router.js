@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 import Dashboard from '../dashboard/Dashboard';
 import EmployeeAndAgentDashboard from '../dashboard/EmployeeAndAgentDashboard';
+import Accountant from '../dashboard/Accountant';
 
 import Login from '../login/Login'
 
@@ -94,6 +95,17 @@ const Router = () => {
           <Header />
           <ProtectedRoute user={user}>
             <EmployeeAndAgentDashboard />
+          </ProtectedRoute>
+        </>
+      ),
+    },
+    {
+      path: '/Accountant',
+      element: (
+        <>
+          <Header />
+          <ProtectedRoute user={user}>
+            <Accountant />
           </ProtectedRoute>
         </>
       ),

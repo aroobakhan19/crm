@@ -25,10 +25,7 @@ const AddUser = () => {
 
   const addData = async () => {
     try {
-      if (!userName || !userId || !userPassword || !userEmail || !employeeRole) {
-        alert("Please fill all the fields");
-        return;
-      }
+
 
       // If all fields are filled, log the data
       const information = {
@@ -45,11 +42,19 @@ const AddUser = () => {
         // addExpensePermission,
       };
       await addUser(information);
-      alert('User added successfully');
+      resetForm()
     } catch (e) {
       alert(e.message);
     }
   };
+
+  const resetForm = () => {
+    setUserName("")
+    setUserId("")
+    setUserPassword("")
+    setUserEmail("")
+    setEmployeeRole("")
+      };
 
   useEffect(() => {
     const fetchNextUserId = async () => {
@@ -78,7 +83,8 @@ const AddUser = () => {
                 <Typography sx={{ fontWeight: 'bold', color: '#011936', fontFamily: 'Arial, sans-serif' }} variant="body1">
                   User Name
                   </Typography>
-                <OutlinedInput placeholder="Enter User Name" fullWidth required value={userName} onChange={(e) => setUserName(e.target.value)}
+                <OutlinedInput
+                 placeholder="Enter User Name" fullWidth required value={userName} onChange={(e) => setUserName(e.target.value)}
                                   sx={{
                                     height: '35px',
                                     '&:hover': { borderColor: '#011936' },

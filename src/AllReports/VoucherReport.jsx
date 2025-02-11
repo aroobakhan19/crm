@@ -3,6 +3,7 @@ import jsPDF from "jspdf";
 import html2canvas from "html2canvas";
 import axios from "axios";
 import Header from "../components/Header";
+import AccountantHeader from "../components/AccountantHeader";
 import {Button} from '@mui/material'
 
 const VoucherReport = () => {
@@ -14,7 +15,15 @@ const VoucherReport = () => {
   const [totalAmount, setTotalAmount] = useState(0); // State for total amount
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-
+                      const [role, setRole] = useState('');
+                                                                    
+                                                                      useEffect(() => {
+                                                                        // Decode role from user in localStorage
+                                                                        const user = JSON.parse(localStorage.getItem('user'));
+                                                                        if (user && user.role) {
+                                                                          setRole(user.role);
+                                                                        }
+                                                                      }, []);
   const fetchExpenses = async () => {
     try {
       const response = await axios.get("https://crm-backend-plum.vercel.app/submitVoucher");
@@ -61,7 +70,11 @@ const VoucherReport = () => {
 
   return (
     <div>
-      <Header />
+              {role === "Accountant" ? (
+        <AccountantHeader />
+      ) : role === 'Admin' ? (
+        <Header />
+      ) : null}
       {/* Controls */}
       <div style={{marginLeft:'250px',marginTop:'120px'}}>
       <div style={{ marginBottom: "20px" }}>

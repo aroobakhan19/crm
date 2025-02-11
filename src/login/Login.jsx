@@ -65,7 +65,12 @@ const Login = () => {
           navigate('/EmployeeAndAgentDashboard'); // Redirect to Employee/Agent Dashboard
           setSnackbarMessage("Welcome Employee/Agent!");
           setSnackbarSeverity("success");
-        } else {
+        } else if (response.user.role === "Accountant") {
+          navigate('/Accountant'); // Redirect to Employee/Agent Dashboard
+          setSnackbarMessage("Welcome Employee/Agent!");
+          setSnackbarSeverity("success");
+        }
+        else {
           setSnackbarMessage("Unauthorized role");
           setSnackbarSeverity("error");
         }
