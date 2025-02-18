@@ -158,7 +158,7 @@ const AddUser = () => {
                 <MenuItem value="Accountant">Accountant</MenuItem>
                 <MenuItem value="Admin">Admin</MenuItem>
               </Select>
-            </Box>
+            </Box> 
 
             {/* Add other permission switches as required */}
 
