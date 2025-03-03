@@ -34,12 +34,6 @@ const AddUser = () => {
         userPassword,
         userEmail,
         employeeRole,
-        // addUserPermission,
-        // addRequirmentPermission,
-        // addAvaibilityPermission,
-        // addProjectPermission,
-        // addRentalPermission,
-        // addExpensePermission,
       };
       await addUser(information);
       resetForm()
