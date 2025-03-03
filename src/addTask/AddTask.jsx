@@ -23,7 +23,7 @@ const AddTask = () => {
             };
       
             await Addtask(addtask)
-            resetForm();
+            // resetForm();
           } catch (e) {
             alert(e.message);
           }
