@@ -34,12 +34,6 @@ const AddUser = () => {
         userPassword,
         userEmail,
         employeeRole,
-        // addUserPermission,
-        // addRequirmentPermission,
-        // addAvaibilityPermission,
-        // addProjectPermission,
-        // addRentalPermission,
-        // addExpensePermission,
       };
       await addUser(information);
       resetForm()
@@ -158,7 +152,7 @@ const AddUser = () => {
                 <MenuItem value="Accountant">Accountant</MenuItem>
                 <MenuItem value="Admin">Admin</MenuItem>
               </Select>
-            </Box>
+            </Box> 
 
             {/* Add other permission switches as required */}
 

@@ -250,8 +250,8 @@ export async function Addtask(addtask){
             taskDescription: addtask.taskDescription,  
             taskPriority: addtask.taskPriority,  
             taskDeadLine: addtask.taskDueDate, 
-            taskAssignedTo: addtask.taskAssignedTo, 
-            taskId: addtask.taskPersonId,
+            taskAssignedTo: addtask.taskPersonId,
+            // taskId: addtask.taskPersonId,
           })
       })
       const data = await response.json();

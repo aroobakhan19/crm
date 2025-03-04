@@ -15,8 +15,9 @@ import Header from '../components/Header'
 const ViewTask = () => {
     const navigate = useNavigate()
     const [task,setTask] = useState([])
+    const [getAdminTask,setGetAdminTask] = useState()
     const [complete,setComplete] = useState()
-    // const [taskAdmin,setTaskAdmin] = useState()
+
     const token = localStorage.getItem('token');
     const [role, setRole] = useState('');
          
@@ -106,7 +107,7 @@ const ViewTask = () => {
 
     const data = await response.json();
     console.log("Fetched Booking History:", data); // Log fetched data
-    setTask(data.data || []);
+    setGetAdminTask(data.data || []);
 
          
         } catch (error) {
