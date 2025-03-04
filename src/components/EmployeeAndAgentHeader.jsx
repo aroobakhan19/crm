@@ -100,7 +100,6 @@ const EmployeeAndAgentHeader = () => {
       },
       { text: 'Add Sell Item', icon: <ReportIcon />, link: '/AddSellProperty' },
       { text: 'View Sell Item', icon: <ReportIcon />, link: '/ViewSellItem' },
-      { text: 'Settings', icon: <SettingsIcon />, link: '/Setting' },
     ];
   
   
